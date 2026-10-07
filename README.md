@@ -1,3 +1,36 @@
+# PixelBench & VectorBench
+
+Two native, offline design apps for AAA Graphic Co. Both are plain desktop programs built with Python + Qt (PySide6).
+Neither touches the network.
+
+| App | In the spirit of | Launch | Notes |
+|---|---|---|---|
+| **PixelBench** | Photopea / Photoshop (raster, layers, brushes, filters) | `python pixelbench.py` | `docs/PIXELBENCH_NOTES.md` |
+| **VectorBench** | Vectorpea / Illustrator (paths, pen, type, pathfinder, SVG/PDF) | `python vectorbench.py` | `docs/VECTORBENCH_NOTES.md` |
+
+Install once with `pip install -r requirements.txt` (Python 3.10+). Build standalone executables with
+`python build.py` (PixelBench) or `python build.py vectorbench`.
+
+---
+
+# VectorBench
+
+An Illustrator-style vector editor. Native, offline, no browser.
+
+![VectorBench](docs/screenshot_vectorbench.png)
+
+**Tools** (shortcut): Selection (V), Direct Selection (A), Pen (P), Add/Delete anchor (+/−), Anchor Point (Shift+C), Pencil (N), Line (\\), Rectangle (M, with corner radius), Ellipse (L), Polygon/Star, Type (T, edited inline on the canvas), Rotate (R), Scale (S), Gradient (G), Eyedropper (I), Hand (H), Zoom (Z).
+
+**Appearance**: fill and stroke as none / solid / linear or radial gradient, stroke width, cap, join, dashes, opacity, 12 blend modes, swatches panel.
+
+**Object & Path**: group/ungroup, lock/hide, arrange, transform dialogs (move/rotate/scale/reflect/shear with live preview and copy), Transform Again (Ctrl+D), Expand/Create Outlines, join, average, outline stroke, offset path, simplify, add anchor points, reverse, Pathfinder (unite, minus front, intersect, exclude, minus back), align and distribute (to selection or artboard).
+
+**Workspace**: layers tree, properties panel (transform / appearance / character), rulers with drag-out guides, grid, snapping, outline mode, tabs, 100-step undo.
+
+**Files**: native `.vbx` (JSON), SVG import/export, true vector PDF export, PNG/JPEG/WebP/TIFF export at any scale, place images, copy/paste as SVG with other apps.
+
+---
+
 # PixelBench
 
 A native, layer-based raster image editor in the spirit of Photopea / Photoshop, with **no browser involved**.
@@ -79,12 +112,24 @@ pip install pytest
 pytest
 ```
 
-The suite covers compositing and blend modes, undo/redo, file round-trips, every filter, selection maths, and a set
+The suite covers both apps: compositing and blend modes, undo/redo, file round-trips, every filter, selection maths, and a set
 of UI smoke tests that drive the real widgets through synthetic mouse events on Qt's offscreen platform.
 
 ## Layout
 
 ```
+vectorbench/
+  model.py       items (path/rect/ellipse/polygon/text/image/group), layers, document, JSON serialisation
+  geometry.py    bezier maths, arc conversion, simplification
+  pathops.py     pathfinder, outline stroke, offset, simplify, join, align/distribute
+  svg.py         SVG import and export
+  fileio.py      .vbx, SVG, PDF and raster export, place image
+  history.py     snapshot undo/redo
+  canvas.py      artboard view: rulers, guides, grid, snapping, selection overlay, inline text editor
+  tools.py       all tools
+  panels.py      tool box, options bar, properties, layers, swatches, align/pathfinder
+  dialogs.py     new/setup/transform/offset/export/gradient dialogs
+  mainwindow.py  menus, tabs, docks, commands
 pixelbench/
   blend.py       blend modes + compositing (NumPy, W3C formulas)
   document.py    Document / Layer model, whole-image operations, undo snapshots
@@ -98,11 +143,11 @@ pixelbench/
   dialogs.py     new / resize / canvas / filter / text / transform / export dialogs
   mainwindow.py  menus, tabs, docks, commands
 tests/           pytest suite
-build.py         PyInstaller build
+build.py         PyInstaller build (either app)
 docs/            notes and screenshot
 ```
 
-See `docs/PIXELBENCH_NOTES.md` for design notes, known gaps and the roadmap.
+See `docs/PIXELBENCH_NOTES.md` and `docs/VECTORBENCH_NOTES.md` for design notes, known gaps and roadmaps.
 
 ---
 *This repository started life as a "random thoughts" scratch repo; PixelBench now lives here.*
