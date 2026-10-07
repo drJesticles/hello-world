@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+build/
+dist/
+*.spec.bak
+.venv/
+venv/
+*.pxb
+!examples/*.pxb
