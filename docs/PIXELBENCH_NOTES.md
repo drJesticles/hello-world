@@ -78,7 +78,9 @@ Key design decisions (so they're not re-litigated):
 ## Where things live
 
 - Repo: `drjesticles/hello-world`, branch `claude/focused-feynman-rpjnuv`, folder `pixelbench/`.
-- This note: `docs/PIXELBENCH_NOTES.md`. Suggested second copy: Valhalla (server `~rexS/`), ask Jesse.
+- This note: `docs/PIXELBENCH_NOTES.md`. Second copy saved 2026-10-07 to Google Drive `Valhalla/PixelBench/`
+  (this file as `PIXELBENCH_NOTES.md` plus a Google Doc "PixelBench Handoff" = README + these notes, exportable to PDF).
+- Still to do: copy to the server (`~rexS/`) on Alex once the branch is pulled there.
 
 ## Build
 
