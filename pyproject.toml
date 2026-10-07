@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pixelbench"
+version = "0.1.0"
+description = "A native, layer-based raster image editor (Photopea-style, no browser)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+    "PySide6>=6.6",
+    "numpy>=1.26",
+    "Pillow>=10.0",
+    "scipy>=1.11",
+    "psd-tools>=1.9",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pyinstaller>=6"]
+
+[project.scripts]
+pixelbench = "pixelbench.mainwindow:main"
+
+[project.gui-scripts]
+pixelbench-gui = "pixelbench.mainwindow:main"
+
+[tool.setuptools.packages.find]
+include = ["pixelbench*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
